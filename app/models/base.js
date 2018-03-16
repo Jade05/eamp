@@ -1,14 +1,28 @@
 import request from 'request'
+
+import API_NAMES from '../constants/api'
 import config from '../config'
+import mockup from '../mockup'
 
 class BaseModel {
   constructor (req) {
     this.req = req
   }
 
-  async invoke(url, params, method = 'POST') {
+  async invoke(apiname, params, method = 'POST') {
+    let url = API_NAMES[apiname]
+
+    if (!url) {
+      throw (`API: ${apiname} is invalid`)
+    }
 
     return new Promise(async (resolve, reject) => {
+
+      if (config.env.to !== 'PRO' && config.env.to !== 'PROD') {
+        resolve(mockup[apiname])
+        return
+      }
+
       this._beforeInvoke(url, params, method)
 
       request({

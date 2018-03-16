@@ -7,7 +7,7 @@ class HomeModel extends BaseModel {
   
   async getListData(params) {
     
-    return await this.invoke('getListData', params)
+    return await this.invoke('GetListData', params)
   }
 }
 
