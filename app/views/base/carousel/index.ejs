@@ -1,0 +1,5 @@
+<amp-carousel layout='responsive' width='300' height='168' type='slides' autoplay>
+  <% carouselData && carouselData.bannerImages && carouselData.bannerImages.forEach(function(item) { %>
+    <amp-img src='<%= item.imageSrc %>' width='300' height='168' layout='responsive'></amp-img>
+  <% }) %>
+</amp-carousel>

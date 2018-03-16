@@ -1,0 +1,18 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+insert_final_newline = true
+
+# 去除行尾空白字符
+# trim_trailing_whitespace = true
+
+# 编码格式
+charset = utf-8
+
+# 两个空格缩进
+indent_style = space
+indent_size = 2

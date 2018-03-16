@@ -1,0 +1,14 @@
+<amp-state id='header'>
+  <script type='application/json'>
+    {
+      "searchClick": 0
+    }
+  </script>
+</amp-state>
+
+<div class='cm-header'>
+  <div class='header-text'><%- headerData.text %></div>
+  <div class='header-carousel'>
+    <%- include('../../base/carousel/index', {carouselData: appData.carouselData}) %>
+  </div>
+</div>
