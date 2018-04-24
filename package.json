@@ -1,5 +1,5 @@
 {
-  "name": "h5-hotel-seo",
+  "name": "eamp-seo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://git.dev.sh.ctripcorp.com/ibu/h5-hotel-seo.git"
+    "url": "https://github.com/Jade05/eamp.git"
   },
   "author": "",
   "license": "ISC",
