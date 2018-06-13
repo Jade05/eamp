@@ -11,18 +11,18 @@
       height='100'
       noloading
       src='<%- appData.listUrl %>'
-      items=''
+      items='items'
       layout='responsive'>
       <div placeholder></div>
       <template type="amp-mustache">
           <div class='item'>
-            <div class='icon'>
-              <i class='htlf-hotel'></i>
-            </div>
             <div class='info'>
-              <span class='city'>{{word}}<span class='position'></span></span>
-              <br>
-              <span class='city-info'>{{cityname}}, {{provincename}}, {{countryname}}</span>
+              <span>{{cityName}}</span>
+              <amp-img src='{{imgUrl}}'
+                width='1080'
+                height='610'
+                layout='responsive'
+                alt={{cityname}}></amp-img>
             </div>
           </div>
       </template>

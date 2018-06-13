@@ -7,4 +7,4 @@ node_modules
 .configTemp
 package-lock.json
 
-dist/css
+../.DS_Store

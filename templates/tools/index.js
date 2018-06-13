@@ -1,6 +1,7 @@
 let shell = require('shelljs')
 let fs = require('fs')
 let EventEmitter = require('events')
+let path = require('path')
 
 let count = 0
 let countEmitter = new EventEmitter()
@@ -20,10 +21,11 @@ for(let i = 0; i < entryEjsDirs.length; i++) {
     fs.readFile(dir, 'utf8', function(err, data) {
       if (err) throw err
 
-      let linkReg = /(<link.*\s+href=(?:"[^"]*"|'[^']*')[^<]*>)/g
+      let linkReg = /(<link rel="stylesheet".*\s+href=(?:"[^"]*"|'[^']*')[^<]*>)/g
       let arrLinks = data.match(linkReg)
 
       let cssLinks = []
+      let cssContents = []
       for(let j = 0; arrLinks && j < arrLinks.length; j++) {
         if (arrLinks[j].indexOf('stylesheet') !== -1) {
           cssLinks.push(arrLinks[j])
@@ -36,31 +38,25 @@ for(let i = 0; i < entryEjsDirs.length; i++) {
         countEmitter.emit('countEvent')
       } else {
         cssLinks.forEach(item => {
-          let targetCssLink = item
-          
-          let tmp = targetCssLink.match(/href="([^\'\"]+)/g)[0].split('=')
-          
-          if (targetCssLink && tmp && tmp.length == 2) {
-            let cssHref = tmp[1].slice(1)
+          // let tmp = targetCssLink.match(/href="([^\'\"]+)/g)[0].split('=')
+          let tmp = /href="\/([^\'\"]+)/g.exec(item)
+          if (tmp && tmp.length >= 2) {
+            let cssHref = path.resolve(tmp[1])
 
-            cssHref.indexOf('<%-') == -1 && fs.readFile(cssHref, 'utf8', function(err2, str) {
-              if (err2) throw err2
-    
-              let result = data.replace(
-                targetCssLink,
-                '<style amp-custom>' + str + '</style>'
-              )
-              fs.writeFile(dir, result, 'utf-8', function (err3) {
-                if (err3) throw err3
-                count++
-                countEmitter.emit('countEvent')
-              })
-            })
-          } else {
-            count++
-            countEmitter.emit('countEvent')
+            cssContents.push(fs.readFileSync(cssHref, 'utf8'))
           }
         })
+
+        let result = data.replace(
+          /(<link rel="stylesheet".*\s+href=(?:"[^"]*"|'[^']*')[^<]*>)/,
+          '<style amp-custom>' + cssContents.join('\r\n') + '</style>'
+        ).replace(
+          linkReg,
+          ''
+        )
+        fs.writeFileSync(dir, result, 'utf-8')
+        count++
+        countEmitter.emit('countEvent')
       }
     })
   }(entryEjsDirs[i]))
@@ -87,7 +83,3 @@ function liftDir() {
     }
   }
 }
-
-
-
-

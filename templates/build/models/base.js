@@ -8,9 +8,17 @@ var _request = require('request');
 
 var _request2 = _interopRequireDefault(_request);
 
+var _api = require('../constants/api');
+
+var _api2 = _interopRequireDefault(_api);
+
 var _config = require('../config');
 
 var _config2 = _interopRequireDefault(_config);
+
+var _mockup = require('../mockup');
+
+var _mockup2 = _interopRequireDefault(_mockup);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21,13 +29,24 @@ class BaseModel {
     this.req = req;
   }
 
-  invoke(url, params, method = 'POST') {
+  invoke(apiname, params, method = 'POST') {
     var _this = this;
 
     return _asyncToGenerator(function* () {
+      let url = _api2.default[apiname];
+
+      if (!url) {
+        throw `API: ${apiname} is invalid`;
+      }
 
       return new Promise((() => {
         var _ref = _asyncToGenerator(function* (resolve, reject) {
+
+          if (_config2.default.env.to !== 'PRO' && _config2.default.env.to !== 'PROD') {
+            resolve(_mockup2.default[apiname]);
+            return;
+          }
+
           _this._beforeInvoke(url, params, method);
 
           (0, _request2.default)({

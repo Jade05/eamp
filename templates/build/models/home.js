@@ -22,7 +22,7 @@ class HomeModel extends _base2.default {
 
     return _asyncToGenerator(function* () {
 
-      return yield _this.invoke('getListData', params);
+      return yield _this.invoke('GetListData', params);
     })();
   }
 }

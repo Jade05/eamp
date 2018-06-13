@@ -19,7 +19,7 @@ const initWebServer = () => {
 
   app.use(compression())
   
-  app.use('/m/eamp/dist', express.static(path.join(__dirname, '../dist')))
+  app.use('/dist', express.static(path.join(__dirname, '../dist')))
 
   app.enable('trust proxy')
   app.set('view engine', 'ejs')

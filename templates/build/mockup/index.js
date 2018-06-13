@@ -11,5 +11,5 @@ var _getListData2 = _interopRequireDefault(_getListData);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  getListData: _getListData2.default
+  GetListData: _getListData2.default
 };
