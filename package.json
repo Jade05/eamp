@@ -8,10 +8,12 @@
   },
   "preferGlobal": true,
   "bin": {
-    "ibu-framework": "./command/index"
+    "ibu-amp-framework": "./command/index"
   },
   "license": "MIT",
   "dependencies": {
-    "commander": "2.7.1"
+    "commander": "^2.7.1",
+    "fs-extra": "^6.0.1",
+    "shelljs": "^0.8.2"
   }
 }

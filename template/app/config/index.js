@@ -2,7 +2,7 @@ import pkg from '../../package.json'
 
 let env = (pkg.config && pkg.config.env && pkg.config.env.toUpperCase()) || 'DEV'
 
-const AppID = ''
+const AppID = '{{APP_ID}}'
 
 const appConfigs = (() => {
   return ({
