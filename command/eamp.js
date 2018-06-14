@@ -15,6 +15,8 @@ function confirm(msg, callback) {
 }
 
 function createApplication(app_name, app_id, type, path) {
+  console.log(`creating [type]${type} [appName]${app_name} [appId]${app_id} [path]${path}...`)
+  
   const templatePath = sysPath.join(__dirname, '..', 'template');
   fs.copySync(templatePath, path);
 

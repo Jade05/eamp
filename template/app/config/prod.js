@@ -1,4 +1,4 @@
 export default {
   Env: 'prod',
-  AppID: '',
+  AppID: '{{APP_ID}}',
 }

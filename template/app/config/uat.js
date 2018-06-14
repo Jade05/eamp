@@ -1,4 +1,4 @@
 export default {
   Env: 'uat',
-  AppID: '',
+  AppID: '{{APP_ID}}',
 }

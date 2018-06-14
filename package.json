@@ -1,14 +1,21 @@
 {
-  "name": "@ctrip/ibu-amp-framework",
-  "version": "1.0.0",
+  "name": "eamp",
+  "version": "1.0.1",
   "description": "node.js framework for ibu amp project",
-  "main": "command/index",
+  "main": "command/index.js",
   "scripts": {
     "start": "npm publish ."
   },
   "preferGlobal": true,
   "bin": {
-    "ibu-amp-framework": "./command/index"
+    "eamp": "./command/index.js"
+  },
+  "author": {
+    "name": "Jade",
+    "email": "bdgoocci@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/Jade05/eamp/issues"
   },
   "license": "MIT",
   "dependencies": {

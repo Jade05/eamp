@@ -5,5 +5,5 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
   Env: 'fws',
-  AppID: ''
+  AppID: '{{APP_ID}}'
 };

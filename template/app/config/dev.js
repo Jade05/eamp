@@ -1,4 +1,4 @@
 export default {
   Env: 'fws',
-  AppID: '',
+  AppID: '{{APP_ID}}',
 }

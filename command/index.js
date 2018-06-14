@@ -21,4 +21,4 @@ program
   .option('--type []', 'add cargo type: online or h5', 'online')
   .parse(process.argv);
 
-require('./ibu-amp-framework')(program)
+require('./eamp')(program)

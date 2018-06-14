@@ -5,5 +5,5 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
   Env: 'prod',
-  AppID: ''
+  AppID: '{{APP_ID}}'
 };

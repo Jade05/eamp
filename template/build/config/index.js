@@ -12,7 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 let env = _package2.default.config && _package2.default.config.env && _package2.default.config.env.toUpperCase() || 'DEV';
 
-const AppID = '';
+const AppID = '{{APP_ID}}';
 
 const appConfigs = (() => {
   return {
