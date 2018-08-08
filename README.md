@@ -1,5 +1,7 @@
 # node.js amp framework
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Jade05/eamp.svg)](https://greenkeeper.io/)
+
 ## Description
 
 eamp是从我们AMP项目实战中提取出来的简化版框架，能够让我们快速开启AMP Node项目，使用者无需从0开始搭建，更能专注AMP页面开发。
