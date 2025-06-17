@@ -1,4 +1,4 @@
-import request from 'request'
+import axios from 'axios'
 
 import API_NAMES from '../constants/api'
 import config from '../config'
@@ -25,25 +25,25 @@ class BaseModel {
 
       this._beforeInvoke(url, params, method)
 
-      request({
-        url: url,
-        method: method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(params),
-      }, (err, response, body) => {
-        if (err) {
-          this._afterErrorInvoke(url, params, method, err)
-          throw(err)
-        }
+      try {
+        const response = await axios({
+          url: url,
+          method: method,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          data: params, // axios uses data instead of body
+        })
 
-        const data = JSON.parse(body)
+        const data = response.data // axios automatically parses JSON
 
         this._afterSuccessInvoke(url, params, response, method)
 
         resolve(data)
-      })
+      } catch (err) {
+        this._afterErrorInvoke(url, params, method, err)
+        reject(err)
+      }
     })
   }
 
