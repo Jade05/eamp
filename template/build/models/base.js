@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _request = require('request');
+var _axios = require('axios');
 
-var _request2 = _interopRequireDefault(_request);
+var _axios2 = _interopRequireDefault(_axios);
 
 var _api = require('../constants/api');
 
@@ -49,25 +49,25 @@ class BaseModel {
 
           _this._beforeInvoke(url, params, method);
 
-          (0, _request2.default)({
-            url: url,
-            method: method,
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(params)
-          }, function (err, response, body) {
-            if (err) {
-              _this._afterErrorInvoke(url, params, method, err);
-              throw err;
-            }
+          try {
+            const response = yield (0, _axios2.default)({
+              url: url,
+              method: method,
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              data: params // axios uses data instead of body
+            });
 
-            const data = JSON.parse(body);
+            const data = response.data; // axios automatically parses JSON
 
             _this._afterSuccessInvoke(url, params, response, method);
 
             resolve(data);
-          });
+          } catch (err) {
+            _this._afterErrorInvoke(url, params, method, err);
+            reject(err);
+          }
         });
 
         return function (_x, _x2) {
