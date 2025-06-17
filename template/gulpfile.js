@@ -1,35 +1,39 @@
 var gulp = require('gulp')
 var watch = require('gulp-watch')
 var less = require('gulp-less')
-var minifyCss = require('gulp-minify-css')
+var cleanCss = require('gulp-clean-css')
 
-gulp.task('images', function () {
+function images() {
   return gulp.src('./app/views/static/images/**')
     .pipe(gulp.dest('./dist/assets/images/'))
-})
+}
 
-gulp.task('fonts', function () {
+function fonts() {
   return gulp.src('./app/views/static/fonts/**')
     .pipe(gulp.dest('./dist/assets/fonts/'))
-})
+}
 
-gulp.task('less', function () {
+function lessTask() {
   return gulp.src('./app/views/static/style/*.less')
     .pipe(less())
-    .pipe(minifyCss())
+    .pipe(cleanCss())
     .pipe(gulp.dest('./dist/assets/css/'))
-})
+}
 
-gulp.task('auto', function () {
-  watch([
+function watchFiles() {
+  return watch([
     './app/views/*.less',
     './app/views/**/*.less',
     './app/views/**/**/*.less',
     './app/views/**/**/**/*.less',
     './app/views/**/**/**/**/*.less'
   ], function () {
-    gulp.start('less')
+    gulp.series(lessTask)()
   })
-})
+}
 
-gulp.task('default', ['less', 'images', 'fonts', 'auto'])
+exports.images = images
+exports.fonts = fonts
+exports.less = lessTask
+exports.watch = watchFiles
+exports.default = gulp.series(gulp.parallel(lessTask, images, fonts), watchFiles)
